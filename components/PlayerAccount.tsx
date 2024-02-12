@@ -4,13 +4,24 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
+import { useSession } from 'next-auth/react';
 
 function PlayerAccount() {
+    const { data: session } = useSession()
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [aboutMe, setAboutMe] = useState('');
     const [isUsernameDisabled, setIsUsernameDisabled] = useState(false);
+    const user = {
+        email: session?.user?.email,
+        username: '',
+        aboutMe: ''
+    }
 
+    if (user.email === null || user.email === undefined) user.email = '';
+    if (user.email !== '') {
+
+    }
     useEffect(() => {
         const currentUsername = null;
 
@@ -18,9 +29,9 @@ function PlayerAccount() {
             try {
                 const response = await axios.get(`/api/getPlayerData?username=${currentUsername}`);
                 const data = response.data;
-                if (data && data.username) {
+                if (data && data.username && user.email !== null && user.email !== undefined) {
                     setUsername(data.username);
-                    setEmail(data.email);
+                    setEmail(user.email);
                     setAboutMe(data.about_me);
                     setIsUsernameDisabled(true); // Disable the username field if data is fetched successfully
                 }
@@ -56,11 +67,11 @@ function PlayerAccount() {
             <Card.Text>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label>Minecraft Username</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Username"
-                            value={username}
+                            value={user.username === '' ? username : user.username}
                             onChange={(e) => setUsername(e.target.value)}
                             disabled={isUsernameDisabled}
                         />
@@ -70,7 +81,9 @@ function PlayerAccount() {
                         <Form.Control
                             type="email"
                             placeholder="name@example.com"
-                            value={email}
+                            //value={email}
+                            value={user.email === '' ? email : user.email}
+                            disabled={true}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>
@@ -79,7 +92,7 @@ function PlayerAccount() {
                         <Form.Control
                             as="textarea"
                             rows={3}
-                            value={aboutMe}
+                            value={user.aboutMe === '' ? aboutMe : user.aboutMe}
                             onChange={(e) => setAboutMe(e.target.value)}
                         />
                     </Form.Group>
