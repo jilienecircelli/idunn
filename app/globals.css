@@ -1,0 +1,74 @@
+body{
+  background: #9D50BB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-attachment: fixed;
+}
+
+.home-styles {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* hiding the error popup on web browser until i can figure out why error */
+nextjs-portal {
+  display: none;
+}
+
+.footer {
+  background-color: transparent;
+  height: 125px;
+}
+
+.footer-card {
+  padding-top: 2rem;
+
+}
+
+.discord-img {
+  height: 20px;
+}
+
+.logo-nav {
+  width: 50px;
+}
+
+.navbrand-style {
+  padding-left: 1rem;
+}
+
+.nav-transparent {
+  background-color: transparent;
+}
+
+.nav-container {
+  font-weight: 450;
+}
+
+.navbar {
+  color: white !important;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-brand {
+  color: white !important; 
+}
+
+.player-account {
+
+}
+
+.container-styles {
+  padding: 1rem;
+}
+
+.card-bg {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar .dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.75);
+}
