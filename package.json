@@ -1,9 +1,9 @@
 {
-  "name": "app_router_tutorial",
+  "name": "idunn",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 9090",
+    "dev": "next start -p 9090",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

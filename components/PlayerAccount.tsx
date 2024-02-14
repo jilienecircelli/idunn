@@ -5,8 +5,10 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function PlayerAccount() {
+    const { push } = useRouter();
     const { data: session } = useSession()
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -20,20 +22,26 @@ function PlayerAccount() {
 
     if (user.email === null || user.email === undefined) user.email = '';
     if (user.email !== '') {
-
+        console.log(user.email)
     }
     useEffect(() => {
-        const currentUsername = null;
+        setEmail(user.email!)
+    }, [user.email])
+
+    useEffect(() => {
 
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`/api/getPlayerData?username=${currentUsername}`);
-                const data = response.data;
+                const response = await axios.get(`/api/users/?email=${email}`);
+                const data = response.data[0];
                 if (data && data.username && user.email !== null && user.email !== undefined) {
                     setUsername(data.username);
                     setEmail(user.email);
                     setAboutMe(data.about_me);
                     setIsUsernameDisabled(true); // Disable the username field if data is fetched successfully
+                }
+                else {
+                    console.log(data)
                 }
             } catch (error) {
                 console.error('Failed to fetch user data', error);
@@ -41,25 +49,46 @@ function PlayerAccount() {
             }
         };
 
-        if (currentUsername) {
+        if (email) {
             fetchUserData();
         }
-    }, []);
+    }, [email]);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        console.log(username)
         try {
             // Modify this URL to match your API endpoint for saving/updating user data
-            const payload = isUsernameDisabled ? { email, about_me: aboutMe } : { username, email, about_me: aboutMe };
-            const response = await axios.post('/api/users', payload);
-            console.log(response.data.message);
             if (!isUsernameDisabled) {
-                setIsUsernameDisabled(true); // Disable username field after successful save
+                const payload = { username, email, about_me: aboutMe };
+                const response = await axios.post('/api/users', payload);
+                console.log(response.data.message);
+                if (!isUsernameDisabled) {
+                    setIsUsernameDisabled(true); // Disable username field after successful save
+                }
+            } else {
+                const payload = {username, email, about_me: aboutMe };
+                const response = await axios.put('api/users', payload);
+                console.log(response.data.message);
+                setIsUsernameDisabled(true);
             }
+
         } catch (error) {
             console.error('Failed to save user data', error);
         }
     };
+
+    const handleDelete = async () => {
+        console.log("Delete button clicked")
+        try {
+            const response = await axios.delete(`/api/users?username=${username}`)
+
+            push('/api/auth/signout');
+
+        } catch (error) {
+            console.log('There was an issue', error)
+        }
+    }
 
     return (
         <Card className='container-styles card-bg'>
@@ -97,7 +126,10 @@ function PlayerAccount() {
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        Save
+                    </Button>
+                    <Button variant="danger" type="button" onClick={handleDelete}>
+                        Delete Account
                     </Button>
                 </Form>
             </Card.Text>
