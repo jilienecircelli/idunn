@@ -1,11 +1,13 @@
 import { Container } from "react-bootstrap"
+import EcoEnchantsList from "../../components/EcoEnchantsList";
 
 
 export default function EcoEnchants() {
+
     return (
         <>
             <Container className="container-styles">
-                <h1>Eco Enchants</h1>
+                <EcoEnchantsList/>
             </Container >
         </>
 
