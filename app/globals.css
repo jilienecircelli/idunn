@@ -105,11 +105,11 @@ nextjs-portal {
 .custom-react-table .tabulator .tabulator-cell {
   padding: 8px;
   border-right: 1px solid #eee;
-  white-space: pre-wrap !important; 
-  word-wrap: break-word !important; 
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
   overflow-wrap: break-word !important;
-  vertical-align: top !important; 
-  text-align: left !important; 
+  vertical-align: top !important;
+  text-align: left !important;
 
 }
 
@@ -138,4 +138,10 @@ nextjs-portal {
   .custom-react-table .tabulator-cell {
     padding: 4px;
   }
+}
+
+.del-account-btn {
+  display: flex;
+  justify-content: space-between;
+
 }

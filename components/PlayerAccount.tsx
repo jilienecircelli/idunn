@@ -65,7 +65,7 @@ function PlayerAccount() {
                     setIsUsernameDisabled(true); // Disable username field after successful save
                 }
             } else {
-                const payload = {username, email, about_me: aboutMe };
+                const payload = { username, email, about_me: aboutMe };
                 const response = await axios.put('api/users', payload);
                 console.log(response.data.message);
                 setIsUsernameDisabled(true);
@@ -123,12 +123,14 @@ function PlayerAccount() {
                             onChange={(e) => setAboutMe(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Save
-                    </Button>
-                    <Button variant="danger" type="button" onClick={handleDelete}>
-                        Delete Account
-                    </Button>
+                    <div className="del-account-btn">
+                        <Button variant="primary" type="submit">
+                            Save
+                        </Button>
+                        <Button variant="danger" type="button" onClick={handleDelete}>
+                            Delete Account
+                        </Button>
+                    </div>
                 </Form>
             </Card.Text>
         </Card>
