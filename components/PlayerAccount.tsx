@@ -45,7 +45,6 @@ function PlayerAccount() {
                 }
             } catch (error) {
                 console.error('Failed to fetch user data', error);
-                // Optionally handle user not found or other errors
             }
         };
 
@@ -58,7 +57,6 @@ function PlayerAccount() {
         e.preventDefault();
         console.log(username)
         try {
-            // Modify this URL to match your API endpoint for saving/updating user data
             if (!isUsernameDisabled) {
                 const payload = { username, email, about_me: aboutMe };
                 const response = await axios.post('/api/users', payload);

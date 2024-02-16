@@ -80,7 +80,7 @@ const PlayerSearchComp = () => {
             <Col sm={8}>
               <div id='player-data'>
                 {username && <p><b>Player:</b> {username}</p>}
-                {aboutMe && <p><b>About {username}:</b> {aboutMe}</p>}
+                {aboutMe && <p><b>About {username}:</b><br/> {aboutMe}</p>}
 
               </div>
             </Col>

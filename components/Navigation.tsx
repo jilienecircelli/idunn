@@ -1,8 +1,7 @@
 "use client"
 import React from 'react';
 import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
-import { useState } from 'react';
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 const Navigation = () => {
 
